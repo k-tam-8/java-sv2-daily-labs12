@@ -17,6 +17,7 @@ public class FileReader {
         try (BufferedReader br = Files.newBufferedReader(path)) {
             int counter = 0;
             while ((line = br.readLine()) != null) {
+                // subjectPostList.add(new SubjectPost(line, br.readLine(),br.readLine(),Integer.parseInt(br.readLine())));
                 tempArr[counter] = line.trim();
                 counter++;
                 if (counter == 4) {
@@ -28,5 +29,15 @@ public class FileReader {
             throw new IllegalStateException("Can not read file", ioe);
         }
         return subjectPostList;
+    }
+
+    public int sumLessons(List<SubjectPost> sjList, String teacher){
+        int sum = 0;
+        for (SubjectPost sp:sjList){
+            if (sp.getName().equals(teacher)){
+                sum+=sp.getLessonByWeek();
+            }
+        }
+        return sum;
     }
 }
